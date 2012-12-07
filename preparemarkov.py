@@ -31,6 +31,8 @@ for log in loglist:
 		result = msg_re.match(line)
 		if result:
 			user = underscores_re.match(result.group(1)).group(1)
+			if user.startswith("qwebirc") or user.startswith("Guest"):
+				continue
 			if user in sameusers_map:
 				user = sameusers_map[user]
 			msg = result.group(2)

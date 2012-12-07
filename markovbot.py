@@ -6,6 +6,7 @@ import markovtextgen
 import time, asyncore
 from thread import *
 from ircasync import *
+import random
 
 channel = "#compsci.bots"
 
@@ -14,7 +15,7 @@ def handle_welcome(_,__):
 
 def markovpost(irc):
 	while True:
-		time.sleep(1)
+		time.sleep(random.uniform(1,5))
 		irc.tell(channel, markovtextgen.getmessage().encode("ascii",errors="ignore"))
 
 irc = IRC(nick="markovbot", start_channels=[channel], version="1.0")
