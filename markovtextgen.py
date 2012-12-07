@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# markov chains text gen
+# gm@stackunderflow.com
+
 import os, re, json, random, time
 
 f = open("markov_out.json",'r')
@@ -10,15 +13,15 @@ f.close()
 userlist = markov.keys()
 
 
-while 1:
+def getmessage():
 	user = random.choice(userlist)
 	if markov[user].keys():
 		word = random.choice(markov[user].keys()) # pick an initial word
 	else:
-		pass
-	print "< %s> " % user,
+		return ""
+	message = "< %s> " % user
 	for i in range(30):
-		print word,
+		message += word + " "
 		if word in markov[user]:
 			nextwords = markov[user][word]
 			if len(nextwords):
@@ -26,10 +29,13 @@ while 1:
 				for nextword in nextwords.keys():
 					for i in range(nextwords[nextword]):
 						nextword_weighted_array += [nextword]
-				#print nextword_weighted_array
 				nextword = random.choice(nextword_weighted_array)
 				word = nextword
 		else:
 			break
-	print ""
-	time.sleep(1)
+	return message
+
+if __name__ == "__main__":
+	while 1:
+		print getmessage()
+		time.sleep(1)

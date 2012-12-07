@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# markov chains preparation tool
+# gm@stackunderflow.com
 
 import os, re, json, sys
 
